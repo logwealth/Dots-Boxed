@@ -3,6 +3,24 @@
   margin: 0;
   box-sizing: border-box;
 }
+.game-title{
+  margin-left: 20px;
+  color: #19a1eb;
+}
+.btn-group{
+  margin: 20px 20px;
+  
+}
+.btn-primary,
+.btn-second{
+  padding: 8px 16px;
+  border: none;
+  border: 2px solid #0722f0;
+  color: #fff;
+  background-color: #19a1eb;
+  border-radius: 4px;
+  font-size: 14px;
+}
 /* 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
