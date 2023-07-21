@@ -50,6 +50,7 @@ function preload() {
 
 function setup() {
   createCanvas(700, 700);
+  console.log('loaded')
   fill(0);
   width = width - 100;
   height = height - 100;
@@ -84,7 +85,7 @@ function setup() {
   coinS.stop();
   BackS.stop();
   BackS.loop();
-  GameRun = false;
+//   GameRun = false;
 }
 
 function draw() {
