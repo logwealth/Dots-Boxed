@@ -300,17 +300,17 @@ function vBar(v1, v2, mv) {
   fill(0);
 }
 
-function keyTyped() {
-  if (key == "t" || key == "T") {
-    //switchTurn();
-  }
-  if (key == "r" || key == "R") {
-    setup();
-  }
-  if (key == "p" || key == "P") {
-    GameRun = !GameRun;
-  }
-}
+// function keyTyped() {
+//   if (key == "t" || key == "T") {
+//     //switchTurn();
+//   }
+//   if (key == "r" || key == "R") {
+//     setup();
+//   }
+//   if (key == "p" || key == "P") {
+//     GameRun = !GameRun;
+//   }
+// }
 
 function switchTurn() {
   turn = 1 - turn;
