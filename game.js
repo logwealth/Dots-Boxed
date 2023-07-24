@@ -7,7 +7,7 @@ let scorePlay = [0, 0];
 let turn = 0;
 //kich thuoc tung o vuong
 let dots = 50;
-let dos = [100, 50];
+let dos = [200, 50];
 //muc do kho cua game
 let diff = 1;
 //xac dinh kich thuoc
@@ -249,11 +249,21 @@ function draw() {
       // text('Player 1: ' + scorePlay[0], width / 7, height / 2.1)
       // text('Player 2: ' + scorePlay[1], width / 7, height / 1.8)
       if (scorePlay[0] > scorePlay[1]) {
-        text("Player 1 Winner", width / 2, height / 10);
+        stopGamePlay("Player 1 Wins!");
       } else if (scorePlay[0] < scorePlay[1]) {
-        text("Player 2 Winner", width / 2, height / 10);
+        stopGamePlay("Player 2 Wins!");
+      } else if(scorePlay[0] === scorePlay[1]){
+        stopGamePlay("It's a Draw!");
       }
     }
+
+    function stopGamePlay(message) {
+      fill(0);
+      textSize(50);
+      textAlign(CENTER);
+      text(message, width / 2, height / 2);
+    }
+
 
     fill(0);
     strokeWeight(1);
@@ -615,6 +625,9 @@ function CheckNumberOfEgesOfRect(gameObject, i, j, hv) {
   }
   return Nl;
 }
+
+
+
 
 
 
