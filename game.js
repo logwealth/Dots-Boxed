@@ -37,7 +37,7 @@ let tempScoreOld = 0,
   tempScoreOne = 0;
 let tTurn;
 
-let isShowGameplay = false;
+let isShowGamePlay = false;
 
 var coinS, BackS, drawS;
 function preload() {
@@ -59,6 +59,7 @@ function setup() {
   selectedGridOption = temporaryGridOption;
   getSize = dos[selectedGridOption];
   gameObject = new GamePlot(getSize);
+  console.log(gameObject);
   gameObject.createGamePlot();
   if (playerOption == 3) {
     frameRate(3);
@@ -89,8 +90,8 @@ function setup() {
 }
 
 function draw() {
-  if (isShowGameplay) {
-    background(255);
+  if (isShowGamePlay) {
+    //background(255);
     fill(255, 10);
     strokeWeight(10);
     rect(dots / 2, dots / 2, width - dots, height - dots);
@@ -343,8 +344,9 @@ function GamePlot(dos) {
       this.lines[i] = [];
       this.rects[i] = [];
       for (var yi = this.ds; yi < height; yi += this.ds) {
+        //debugger;
+        
         this.grid[i][j] = [xi, yi];
-
         this.lines[i][j] = [];
         this.lines[i][j][0] = [0, xi, yi, xi + this.ds, yi];
         this.lines[i][j][1] = [0, xi, yi, xi, yi + this.ds];
@@ -352,8 +354,9 @@ function GamePlot(dos) {
         j++;
       }
       i++;
+      
     }
-    // console.log(`i: ${i} - j: ${j}`)
+   
     this.r = i;
     this.c = j;
     this.Nrect = (this.r - 1) * (this.c - 1);
@@ -403,8 +406,9 @@ function GamePlot(dos) {
           line(x1, y1, x2, y2);
         }
       }
+      //console.log(`i: ${i} - j: ${j}`)
     }
-    //console.log(`i: ${i} - j: ${j}`)
+  
   };
 
   this.displayGrid = function () {
@@ -418,6 +422,7 @@ function GamePlot(dos) {
   };
 
   this.CheckMouse = function (turn) {
+    //debugger;
     var i = floor(mouseX / this.ds) - 1;
     var j = floor(mouseY / this.ds) - 1;
     if (i >= 0 && j >= 0 && i < this.grid.length && j < this.grid[0].length) {
@@ -440,6 +445,7 @@ function GamePlot(dos) {
           this.lines[i][j][0][3],
           this.lines[i][j][0][4]
         );
+        console.log(`__diem: ${i} vs diem: ${j}`)
         if (mousePRE) {
           if (this.lines[i][j][0][0] == 0) {
             this.lines[i][j][0][0] = 1;
@@ -465,6 +471,7 @@ function GamePlot(dos) {
           this.lines[i][j][1][3],
           this.lines[i][j][1][4]
         );
+        console.log(`__diem: ${i} vs diem: ${j}`)
         if (mousePRE) {
           if (this.lines[i][j][1][0] == 0) {
             this.lines[i][j][1][0] = 1;
@@ -484,6 +491,7 @@ function GamePlot(dos) {
   };
 
   this.setPLine = function (i, j, hv, turn) {
+    //debugger;
     if (i >= 0 && j >= 0 && i < this.grid.length && j < this.grid[0].length) {
       strokeWeight(5);
       if (turn == 0) {
