@@ -158,77 +158,6 @@ function draw() {
         if (!BackS.isPlaying()) {
           BackS.play();
         }
-        if (playerOption != 0) {
-          if (playerOption == 1) {
-            if (turn == 1) {
-              
-              var tim = millis();
-              for (var t = tim; t < tim + 500000; t += millis() - tim) {}
-
-              if (IJH.length > 0) {
-                mousePRE = true;
-                gameObject.setPLine(IJH[0], IJH[1], IJH[2], turn);
-              }
-            }
-          }
-
-          if (playerOption == 2) {
-            if (turn == 1) {
-              var tim = millis();
-              for (var t = tim; t < tim + 500000; t += millis() - tim) {}
-
-              if (IJH.length > 0) {
-                mousePRE = true;
-                gameObject.setPLine(IJH[0], IJH[1], IJH[2], turn);
-              }
-            }
-          }
-
-          if (playerOption == 3) {
-           
-            if (IJH.length > 0) {
-              //if(random(0,1)<0.3){mousePRE =true;}
-              mousePRE = true;
-              gameObject.setPLine(IJH[0], IJH[1], IJH[2], turn);
-            }
-            //drawS.play();
-          }
-          fill(0, 255, 0);
-          if (IJH != null) {
-            IJHi[0] = IJH[0];
-            IJHi[1] = IJH[1];
-            IJHi[2] = IJH[2];
-          }
-
-          strokeWeight(5);
-          if (tTurn == 1) {
-            stroke(0, 255, 0);
-          }
-          if (tTurn == 0) {
-            stroke(255, 0, 0);
-          }
-          if (playerOption == 1 || playerOption == 2) {
-            tTurn = 1;
-          } else {
-            tTurn = turn;
-          }
-
-          if (IJHi[2] == 0) {
-            line(
-              getSize + getSize * IJHi[0],
-              getSize + getSize * IJHi[1],
-              2 * getSize + getSize * IJHi[0],
-              getSize + getSize * IJHi[1]
-            );
-          } else {
-            line(
-              getSize + getSize * IJHi[0],
-              getSize + getSize * IJHi[1],
-              getSize + getSize * IJHi[0],
-              2 * getSize + getSize * IJHi[1]
-            );
-          }
-        }
       } else {
         if (BackS.isPlaying()) {
           BackS.stop();
@@ -629,9 +558,6 @@ function CheckNumberOfEgesOfRect(gameObject, i, j, hv) {
   }
   return Nl;
 }
-
-
-
 
 
 
