@@ -70,8 +70,9 @@ function setup() {
 
   scorePlay = [0, 0];
 
-  turn = 0;
+  turn = Math.floor(random(0,2));
   tTurn = turn;
+  console.log(turn);
 
   b1 = new Button(width - 20, height - 50, 25, "Play&Pause");
   b2 = new Button(width - 20, height - 80, 23, "Apply&Start");
