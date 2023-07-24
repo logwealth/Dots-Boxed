@@ -7,7 +7,7 @@ let scorePlay = [0, 0];
 let turn = 0;
 //kich thuoc tung o vuong
 let dots = 50;
-let dos = [200, 50];
+let dos = [100, 50];
 //muc do kho cua game
 let diff = 1;
 //xac dinh kich thuoc
@@ -39,7 +39,7 @@ let tTurn;
 
 let isShowGamePlay = false;
 
-const playerColors = ["red", "green","yellow"];
+const playerColors = ["red", "green", "yellow"];
 
 var coinS, BackS, drawS;
 function preload() {
@@ -87,7 +87,6 @@ function setup() {
   coinS.stop();
   BackS.stop();
   BackS.loop();
-
 
   //   GameRun = false;
 }
@@ -185,18 +184,17 @@ function draw() {
         stopGamePlay("Player 1 Wins!", playerColors[0]);
       } else if (scorePlay[0] < scorePlay[1]) {
         stopGamePlay("Player 2 Wins!", playerColors[1]);
-      } else if(scorePlay[0] === scorePlay[1]){
+      } else if (scorePlay[0] === scorePlay[1]) {
         stopGamePlay("It's a Draw!", playerColors[2]);
       }
     }
 
-    function stopGamePlay(message,color) {
+    function stopGamePlay(message, color) {
       fill(color);
       textSize(20);
       textAlign(CENTER);
       text(message, width / 2, height / 10);
     }
-
 
     fill(0);
     strokeWeight(1);
@@ -303,16 +301,12 @@ function GamePlot(dos) {
   };
 
   this.displayRect = function () {
-    //noStroke();
+    // noStroke();
     for (var i = 0; i < this.rects.length; i++) {
       for (var j = 0; j < this.rects[i].length; j++) {
         if (this.rects[i][j][0] != 0) {
-          fill(
-            255 * (1 - this.rects[i][j][3]),
-            255 * this.rects[i][j][3],
-            0,
-            150
-          );
+          if (this.rects[i][j][3] == 0) fill(36, 206, 251, 200);
+          if (this.rects[i][j][3] == 1) fill(255, 169, 106, 200);
           rect(this.rects[i][j][1], this.rects[i][j][2], this.ds, this.ds);
         }
       }
@@ -324,8 +318,7 @@ function GamePlot(dos) {
 
   this.displayLines = function () {
     //fill(0);
-    stroke(0, 0, 255);
-    strokeWeight(5);
+    strokeWeight(8);
     for (var i = 0; i < this.lines.length; i++) {
       for (var j = 0; j < this.lines[i].length; j++) {
         //if(j!=this.lines[i].length-1){
@@ -334,6 +327,13 @@ function GamePlot(dos) {
           var y1 = this.lines[i][j][0][2];
           var x2 = this.lines[i][j][0][3];
           var y2 = this.lines[i][j][0][4];
+
+          if (this.lines[i][j][0][5] == 0) {
+            stroke(239, 147, 101);
+          } else if (this.lines[i][j][0][5] == 1) {
+            stroke(62, 167, 208);
+          }
+
           line(x1, y1, x2, y2);
         }
 
@@ -343,6 +343,12 @@ function GamePlot(dos) {
           var y1 = this.lines[i][j][1][2];
           var x2 = this.lines[i][j][1][3];
           var y2 = this.lines[i][j][1][4];
+
+          if (this.lines[i][j][1][5] == 0) {
+            stroke(239, 147, 101);
+          } else if (this.lines[i][j][1][5] == 1) {
+            stroke(62, 167, 208);
+          }
           line(x1, y1, x2, y2);
         }
       }
@@ -369,10 +375,10 @@ function GamePlot(dos) {
       strokeWeight(5);
 
       if (turn == 0) {
-        stroke(255, 0, 0, 100);
+        stroke(239, 147, 101, 150);
       }
       if (turn == 1) {
-        stroke(0, 255, 0, 100);
+        stroke(62, 167, 208, 150);
       }
       if (
         mouseY > this.lines[i][j][0][2] - 10 &&
@@ -389,6 +395,7 @@ function GamePlot(dos) {
         if (mousePRE) {
           if (this.lines[i][j][0][0] == 0) {
             this.lines[i][j][0][0] = 1;
+            this.lines[i][j][0][5] = turn;
             var S = this.updateRect(i, j, turn);
             drawS.play();
             if (S == 0) {
@@ -415,6 +422,7 @@ function GamePlot(dos) {
         if (mousePRE) {
           if (this.lines[i][j][1][0] == 0) {
             this.lines[i][j][1][0] = 1;
+            this.lines[i][j][1][5] = turn;
             var S = this.updateRect(i, j, turn);
             drawS.play();
             if (S == 0) {
@@ -435,7 +443,7 @@ function GamePlot(dos) {
     if (i >= 0 && j >= 0 && i < this.grid.length && j < this.grid[0].length) {
       strokeWeight(5);
       if (turn == 0) {
-        stroke(255, 0, 0, 100);
+        stroke(239, 147, 101, 100);
       }
       if (turn == 1) {
         stroke(0, 255, 0, 100);
@@ -558,8 +566,6 @@ function CheckNumberOfEgesOfRect(gameObject, i, j, hv) {
   }
   return Nl;
 }
-
-
 
 function Button(x, y, sz, label) {
   this.x = x;
