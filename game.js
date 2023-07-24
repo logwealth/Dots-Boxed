@@ -157,7 +157,7 @@ function draw() {
         if (playerOption != 0) {
           if (playerOption == 1) {
             if (turn == 1) {
-              IJH = AIAgentP(gameObject, 0.3);
+              
               var tim = millis();
               for (var t = tim; t < tim + 500000; t += millis() - tim) {}
 
@@ -170,7 +170,6 @@ function draw() {
 
           if (playerOption == 2) {
             if (turn == 1) {
-              IJH = AIAgentP(gameObject, 0.9);
               var tim = millis();
               for (var t = tim; t < tim + 500000; t += millis() - tim) {}
 
@@ -182,7 +181,7 @@ function draw() {
           }
 
           if (playerOption == 3) {
-            IJH = AIAgentP(gameObject, 0.9);
+           
             if (IJH.length > 0) {
               //if(random(0,1)<0.3){mousePRE =true;}
               mousePRE = true;
@@ -617,188 +616,7 @@ function CheckNumberOfEgesOfRect(gameObject, i, j, hv) {
   return Nl;
 }
 
-function dumbAIAgent(gameObject) {
-  var aLines = [];
-  var ij = 0;
-  for (var i = 0; i < gameObject.lines.length; i++) {
-    for (var j = 0; j < gameObject.lines[i].length; j++) {
-      if (i < gameObject.lines.length - 1) {
-        if (gameObject.lines[i][j][0][0] == 0) {
-          aLines[ij] = [i, j, 0];
-          ij++;
-        }
-      }
-      if (j < gameObject.lines[i].length - 1) {
-        if (gameObject.lines[i][j][1][0] == 0) {
-          aLines[ij] = [i, j, 1];
-          ij++;
-        }
-      }
-    }
-  }
-  if (ij > 0) {
-    var r = round(random(0, ij - 1));
-    return aLines[r];
-  } else {
-    return aLines;
-  }
-}
 
-function LessDumbAIAgent(gameObject) {
-  var aLines = [];
-  var ij = 0;
-  var indx = [];
-  for (var i = 0; i < gameObject.lines.length; i++) {
-    for (var j = 0; j < gameObject.lines[i].length; j++) {
-      if (i < gameObject.lines.length - 1) {
-        if (gameObject.lines[i][j][0][0] == 0) {
-          aLines[ij] = [i, j, 0];
-          indx[ij] = ij;
-          ij++;
-        }
-      }
-      if (j < gameObject.lines[i].length - 1) {
-        if (gameObject.lines[i][j][1][0] == 0) {
-          aLines[ij] = [i, j, 1];
-          indx[ij] = ij;
-          ij++;
-        }
-      }
-    }
-  }
-
-  if (ij > 0) {
-    for (var ii = 0; ii < ij - 1; ii++) {
-      var rr = round(random(0, indx.length - 1));
-      var r = indx[rr];
-
-      var ni = aLines[r][0];
-      var nj = aLines[r][1];
-      var nHv = aLines[r][2];
-      var N = CheckNumberOfEgesOfRect(gameObject, ni, nj, nHv);
-      if (max(N) < 2) {
-        return [ni, nj, nHv];
-        indx = removeIfromArray(indx, rr);
-      }
-    }
-
-    var r = round(random(0, ij - 1));
-    return aLines[r];
-  } else {
-    return aLines;
-  }
-}
-
-function AIAgent(gameObject) {
-  for (var i = 0; i < gameObject.rects.length - 1; i++) {
-    for (var j = 0; j < gameObject.rects[i].length - 1; j++) {
-      if (gameObject.rects[i][j][0] == 0) {
-        if (
-          gameObject.lines[i][j][0][0] +
-            gameObject.lines[i][j][1][0] +
-            gameObject.lines[i + 1][j][1][0] +
-            gameObject.lines[i][j + 1][0][0] ==
-          3
-        ) {
-          if (gameObject.lines[i][j][0][0] == 0) {
-            return [i, j, 0];
-          } else if (gameObject.lines[i][j][1][0] == 0) {
-            return [i, j, 1];
-          } else if (gameObject.lines[i + 1][j][1][0] == 0) {
-            return [i + 1, j, 1];
-          } else {
-            return [i, j + 1, 0];
-          }
-        }
-      }
-    }
-  }
-  return LessDumbAIAgent(gameObject);
-}
-
-function AIAgentP(gameObject, p) {
-  for (var i = 0; i < gameObject.rects.length - 1; i++) {
-    for (var j = 0; j < gameObject.rects[i].length - 1; j++) {
-      if (gameObject.rects[i][j][0] == 0) {
-        if (
-          gameObject.lines[i][j][0][0] +
-            gameObject.lines[i][j][1][0] +
-            gameObject.lines[i + 1][j][1][0] +
-            gameObject.lines[i][j + 1][0][0] ==
-          3
-        ) {
-          if (gameObject.lines[i][j][0][0] == 0) {
-            return [i, j, 0];
-          } else if (gameObject.lines[i][j][1][0] == 0) {
-            return [i, j, 1];
-          } else if (gameObject.lines[i + 1][j][1][0] == 0) {
-            return [i + 1, j, 1];
-          } else {
-            return [i, j + 1, 0];
-          }
-        }
-      }
-    }
-  }
-
-  if (random(0, 1) < p) {
-    return LessDumbAIAgent(gameObject);
-  } else {
-    return dumbAIAgent(gameObject);
-  }
-}
-
-// function ButtonC(xi, yi, di, label) {
-// 	this.x = xi;
-// 	this.y = yi;
-// 	this.d = di;
-// 	this.label = label
-
-// 	this.drawButton = function () {
-// 		fill(255)
-// 		strokeWeight(3)
-// 		stroke(0)
-// 		ellipse(this.x, this.y - 10, this.d, this.d)
-// 		ellipse(this.x, this.y - 5, this.d, this.d)
-// 		ellipse(this.x, this.y, this.d, this.d)
-// 		fill(0)
-// 		strokeWeight(0)
-// 		textSize(this.d / 4)
-// 		textAlign(CENTER, CENTER)
-// 		text(this.label, this.x, this.y)//,this.d,this.d)
-// 	}
-
-// 	this.isClicked = function () {
-// 		if (dist(mouseX, mouseY, this.x, this.y) < this.d) {
-// 			if (MPressed) {
-// 				MPressed = false;
-// 				fill(0, 0, 0)
-// 				ellipse(this.x, this.y - 10, this.d, this.d)
-// 				ellipse(this.x, this.y - 5, this.d, this.d)
-// 				return true;
-// 			}
-// 			else { return false; }
-// 		}
-// 		else { return false; }
-// 	}
-// }
-
-function removeIfromArray(B, i) {
-  if (i <= B.length && i >= 0) {
-    var Bi = [];
-    count = 0;
-    for (var j = 0; j < B.length; j++) {
-      if (j != i) {
-        Bi[count] = B[j];
-        count++;
-      }
-    }
-    B = [];
-    B = Bi;
-  }
-
-  return B;
-}
 
 function Button(x, y, sz, label) {
   this.x = x;
