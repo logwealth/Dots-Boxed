@@ -50,10 +50,9 @@ function preload() {
 
 function setup() {
   createCanvas(700, 700);
-  console.log('loaded')
   fill(0);
-  width = width - 100;
-  height = height - 100;
+  // width = width - 100;
+  // height = height - 100;
 
   playerOption = temporaryPlayerOption;
   selectedGridOption = temporaryGridOption;
@@ -86,16 +85,16 @@ function setup() {
   coinS.stop();
   BackS.stop();
   BackS.loop();
-//   GameRun = false;
+  //   GameRun = false;
 }
 
 function draw() {
   if (isShowGamePlay) {
-    //background(255);
+    background(255);
     fill(255, 10);
     strokeWeight(10);
-    rect(dots / 2, dots / 2, width - dots, height - dots);
-    rect(5, 5, width + 80, height + 30);
+    rect(dots / 2, dots / 2, width - dots - 100, height - dots - 100);
+    rect(5, 5, width - 20, height - 30);
 
     fill(0, 0, 255);
     strokeWeight(0);
@@ -108,16 +107,16 @@ function draw() {
 
     fill(0);
     stroke(0);
-    text("Player 1", width - dots / 3, 70);
-    text(" " + gameObject.scorePlays[0], width + 5, 100);
-    text("Player 2", width - dots / 3, 150);
-    text(" " + gameObject.scorePlays[1], width + 5, 180);
+    text("Player 1", width - dots / 3 - 100, 70);
+    text(" " + gameObject.scorePlays[0], width - 60, 100);
+    text("Player 2", width - dots / 3 - 100, 150);
+    text(" " + gameObject.scorePlays[1], width - 60, 180);
 
     textSize(13);
-    text("Turn", width - dots / 3, 290);
-    text("Player #" + (turn + 1), width - dots / 3, 310);
+    text("Turn", width - dots / 3 - 100, 290);
+    text("Player #" + (turn + 1), width - dots / 3 - 100, 310);
     fill(255 * (1 - turn), 255 * turn, 0, 200);
-    ellipse(width + 60, 290, 30, 30);
+    ellipse(width - 40, 290, 30, 30);
 
     // fill(0, 0, 255)
     // textSize(23);
@@ -125,9 +124,9 @@ function draw() {
 
     //vBar(gameObject.scorePlays[0], gameObject.scorePlays[1], gameObject.Nrect)
     fill(255, 0, 0, 150);
-    rect(width - 15, 85, 15, 15);
+    rect(width - 80, 85, 15, 15);
     fill(0, 255, 0, 150);
-    rect(width - 15, 165, 15, 15);
+    rect(width - 80, 165, 15, 15);
 
     if (
       gameObject.scorePlays[0] != tempScoreOld ||
@@ -273,9 +272,9 @@ function draw() {
     // if (b2.isClicked()) { setup(); }
     fill(0);
     strokeWeight(5);
-    line(width - 25, 575, width + 85, 575);
-    line(width - 25, 270, width + 85, 270);
-    line(width - 25, 320, width + 85, 320);
+    line(width - 120, 575, width - 20, 575);
+    line(width - 120, 270, width - 20, 270);
+    line(width - 120, 320, width - 20, 320);
     fill(0, 0, 255);
     textSize(20);
     strokeWeight(0);
@@ -338,14 +337,14 @@ function GamePlot(dos) {
   this.createGamePlot = function () {
     var i = 0;
     var j = 0;
-    for (var xi = this.ds; xi < width; xi += this.ds) {
+    for (var xi = this.ds; xi < width - this.ds; xi += this.ds) {
       j = 0;
       this.grid[i] = [];
       this.lines[i] = [];
       this.rects[i] = [];
-      for (var yi = this.ds; yi < height; yi += this.ds) {
+      for (var yi = this.ds; yi < height - this.ds; yi += this.ds) {
         //debugger;
-        
+
         this.grid[i][j] = [xi, yi];
         this.lines[i][j] = [];
         this.lines[i][j][0] = [0, xi, yi, xi + this.ds, yi];
@@ -354,9 +353,8 @@ function GamePlot(dos) {
         j++;
       }
       i++;
-      
     }
-   
+
     this.r = i;
     this.c = j;
     this.Nrect = (this.r - 1) * (this.c - 1);
@@ -408,7 +406,6 @@ function GamePlot(dos) {
       }
       //console.log(`i: ${i} - j: ${j}`)
     }
-  
   };
 
   this.displayGrid = function () {
@@ -425,6 +422,7 @@ function GamePlot(dos) {
     //debugger;
     var i = floor(mouseX / this.ds) - 1;
     var j = floor(mouseY / this.ds) - 1;
+
     if (i >= 0 && j >= 0 && i < this.grid.length && j < this.grid[0].length) {
       strokeWeight(5);
 
@@ -445,7 +443,7 @@ function GamePlot(dos) {
           this.lines[i][j][0][3],
           this.lines[i][j][0][4]
         );
-        console.log(`__diem: ${i} vs diem: ${j}`)
+        console.log(`__diem: ${i} vs diem: ${j}`);
         if (mousePRE) {
           if (this.lines[i][j][0][0] == 0) {
             this.lines[i][j][0][0] = 1;
@@ -471,7 +469,7 @@ function GamePlot(dos) {
           this.lines[i][j][1][3],
           this.lines[i][j][1][4]
         );
-        console.log(`__diem: ${i} vs diem: ${j}`)
+        console.log(`__diem: ${i} vs diem: ${j}`);
         if (mousePRE) {
           if (this.lines[i][j][1][0] == 0) {
             this.lines[i][j][1][0] = 1;
