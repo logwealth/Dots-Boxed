@@ -5,7 +5,7 @@ playBtn.addEventListener('click', () => {
   GameRun = true
   console.log('Loaded.....')
   setTimeout(() => {
-    isShowGameplay = true
+    isShowGamePlay = true
     console.log('loading')
   }, 500)
 
