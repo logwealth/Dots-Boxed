@@ -39,6 +39,8 @@ let tTurn;
 
 let isShowGamePlay = false;
 
+const playerColors = ["red", "green","yellow"];
+
 var coinS, BackS, drawS;
 function preload() {
   coinS = loadSound("sound-coin.wav");
@@ -85,6 +87,8 @@ function setup() {
   coinS.stop();
   BackS.stop();
   BackS.loop();
+
+
   //   GameRun = false;
 }
 
@@ -249,19 +253,19 @@ function draw() {
       // text('Player 1: ' + scorePlay[0], width / 7, height / 2.1)
       // text('Player 2: ' + scorePlay[1], width / 7, height / 1.8)
       if (scorePlay[0] > scorePlay[1]) {
-        stopGamePlay("Player 1 Wins!");
+        stopGamePlay("Player 1 Wins!", playerColors[0]);
       } else if (scorePlay[0] < scorePlay[1]) {
-        stopGamePlay("Player 2 Wins!");
+        stopGamePlay("Player 2 Wins!", playerColors[1]);
       } else if(scorePlay[0] === scorePlay[1]){
-        stopGamePlay("It's a Draw!");
+        stopGamePlay("It's a Draw!", playerColors[2]);
       }
     }
 
-    function stopGamePlay(message) {
-      fill(0);
-      textSize(50);
+    function stopGamePlay(message,color) {
+      fill(color);
+      textSize(20);
       textAlign(CENTER);
-      text(message, width / 2, height / 2);
+      text(message, width / 2, height / 10);
     }
 
 
