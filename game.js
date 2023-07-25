@@ -44,7 +44,7 @@ const playerColors = ["red", "green", "yellow"];
 var coinS, BackS, drawS;
 function preload() {
   coinS = loadSound("sound-coin.wav");
-  BackS = loadSound("Background.mp3");
+  BackS = loadSound("voice-bg.mp3");
   drawS = loadSound("event.wav");
   drawS.rate(3);
   BackS.loop();
@@ -112,9 +112,9 @@ function draw() {
     fill(0);
     stroke(0);
     text("Player 1", width - dots / 3 - 100, 70);
-    text(" " + gameObject.scorePlays[0], width - 60, 100);
+    text(" " + gameObject.scorePlays[0], width - 60, 98);
     text("Player 2", width - dots / 3 - 100, 150);
-    text(" " + gameObject.scorePlays[1], width - 60, 180);
+    text(" " + gameObject.scorePlays[1], width - 60, 178);
 
     textSize(13);
     text("Turn", width - dots / 3 - 100, 290);
@@ -128,9 +128,9 @@ function draw() {
 
     //vBar(gameObject.scorePlays[0], gameObject.scorePlays[1], gameObject.Nrect)
     fill(255, 0, 0, 150);
-    rect(width - 80, 85, 15, 15);
+    rect(width - 80, 85, 15, 15, 5);
     fill(0, 255, 0, 150);
-    rect(width - 80, 165, 15, 15);
+    rect(width - 80, 165, 15, 15, 5);
 
     if (
       gameObject.scorePlays[0] != tempScoreOld ||
