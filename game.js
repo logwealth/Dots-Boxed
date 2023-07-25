@@ -7,7 +7,7 @@ let scorePlay = [0, 0];
 let turn = 0;
 //kich thuoc tung o vuong
 let dots = 50;
-let dos = [100, 50];
+let dos = [200, 50];
 //muc do kho cua game
 let diff = 1;
 //xac dinh kich thuoc
@@ -39,7 +39,7 @@ let tTurn;
 
 let isShowGamePlay = false;
 
-const playerColors = ["red", "green", "yellow"];
+const playerColors = ["#54d9fc", "#ffbc8a", "#fdc633"];
 
 var coinS, BackS, drawS;
 function preload() {
@@ -119,17 +119,24 @@ function draw() {
     textSize(13);
     text("Turn", width - dots / 3 - 100, 290);
     text("Player #" + (turn + 1), width - dots / 3 - 100, 310);
-    fill(255 * (1 - turn), 255 * turn, 0, 200);
+    if(turn === 0){
+      fill(36, 206, 251, 200)
+    }else{
+      fill(255, 169, 106, 200)
+    }
+    //fill(255 * (1 - turn), 255 * turn, 0, 200);
     ellipse(width - 40, 290, 30, 30);
 
+    // fill(36, 206, 251, 200)
+    // fill(255, 169, 106, 200)
     // fill(0, 0, 255)
     // textSize(23);
     // text('Scores', width - 10, 260)
 
     //vBar(gameObject.scorePlays[0], gameObject.scorePlays[1], gameObject.Nrect)
-    fill(255, 0, 0, 150);
+    fill(36, 206, 251, 200);
     rect(width - 80, 85, 15, 15, 5);
-    fill(0, 255, 0, 150);
+    fill(255, 169, 106, 200)
     rect(width - 80, 165, 15, 15, 5);
 
     if (
