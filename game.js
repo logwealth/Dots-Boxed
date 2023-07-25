@@ -7,7 +7,7 @@ let scorePlay = [0, 0];
 let turn = 0;
 //kich thuoc tung o vuong
 let dots = 50;
-let dos = [200, 50];
+let dos = [100, 50];
 //muc do kho cua game
 let diff = 1;
 //xac dinh kich thuoc
@@ -39,7 +39,7 @@ let tTurn;
 
 let isShowGamePlay = false;
 
-const playerColors = ["#54d9fc", "#ffbc8a", "#fdc633"];
+const playerColors = ["#ffbc8a", "#54d9fc", "#fdc633"];
 
 var coinS, BackS, drawS;
 function preload() {
@@ -53,14 +53,11 @@ function preload() {
 function setup() {
   createCanvas(700, 700);
   fill(0);
-  // width = width - 100;
-  // height = height - 100;
 
   playerOption = temporaryPlayerOption;
   selectedGridOption = temporaryGridOption;
   getSize = dos[selectedGridOption];
   gameObject = new GamePlot(getSize);
-  console.log(gameObject);
   gameObject.createGamePlot();
   if (playerOption == 3) {
     frameRate(3);
@@ -70,12 +67,7 @@ function setup() {
 
   scorePlay = [0, 0];
 
-  turn = Math.floor(random(0,2));
-  tTurn = turn;
-  console.log(turn);
-
-  b1 = new Button(width - 20, height - 50, 25, "Play&Pause");
-  b2 = new Button(width - 20, height - 80, 23, "Apply&Start");
+  turn = Math.floor(random(0, 2));
 
   var labels1 = [];
   Modes = new gridOption(width - 10, 375, 1, labels1);
@@ -104,10 +96,7 @@ function draw() {
     strokeWeight(0);
     stroke(0, 0, 255);
     textSize(30);
-    //text('Game of Dots and Lines', width / 4, height + 10)
     textSize(15);
-    //text('nikeshbajaj.in', width - dots / 2, 22)
-    //text("Nik'B", width + dots / 1.5, height + 30)
 
     fill(0);
     stroke(0);
@@ -119,24 +108,16 @@ function draw() {
     textSize(13);
     text("Turn", width - dots / 3 - 100, 290);
     text("Player #" + (turn + 1), width - dots / 3 - 100, 310);
-    if(turn === 0){
-      fill(36, 206, 251, 200)
-    }else{
-      fill(255, 169, 106, 200)
+    if (turn === 0) {
+      fill(255, 169, 106, 200);
+    } else if (turn === 1) {
+      fill(36, 206, 251, 200);
     }
-    //fill(255 * (1 - turn), 255 * turn, 0, 200);
     ellipse(width - 40, 290, 30, 30);
 
-    // fill(36, 206, 251, 200)
-    // fill(255, 169, 106, 200)
-    // fill(0, 0, 255)
-    // textSize(23);
-    // text('Scores', width - 10, 260)
-
-    //vBar(gameObject.scorePlays[0], gameObject.scorePlays[1], gameObject.Nrect)
     fill(36, 206, 251, 200);
     rect(width - 80, 85, 15, 15, 5);
-    fill(255, 169, 106, 200)
+    fill(255, 169, 106, 200);
     rect(width - 80, 165, 15, 15, 5);
 
     if (
@@ -214,10 +195,6 @@ function draw() {
     temporaryGridOption = GriSOp.Op;
 
     // ============ BUTTON ==============
-    // b1.draw();
-    // if (b1.isClicked()) { GameRun = !GameRun; }
-    // b2.draw();
-    // if (b2.isClicked()) { setup(); }
     fill(0);
     strokeWeight(5);
     line(width - 120, 575, width - 20, 575);
@@ -313,8 +290,8 @@ function GamePlot(dos) {
     for (var i = 0; i < this.rects.length; i++) {
       for (var j = 0; j < this.rects[i].length; j++) {
         if (this.rects[i][j][0] != 0) {
-          if (this.rects[i][j][3] == 0) fill(36, 206, 251, 200);
-          if (this.rects[i][j][3] == 1) fill(255, 169, 106, 200);
+          if (this.rects[i][j][3] == 0) fill(255, 169, 106, 200);
+          if (this.rects[i][j][3] == 1) fill(36, 206, 251, 200);
           rect(this.rects[i][j][1], this.rects[i][j][2], this.ds, this.ds);
         }
       }
@@ -573,52 +550,6 @@ function CheckNumberOfEgesOfRect(gameObject, i, j, hv) {
       gameObject.lines[r[2]][r[3] + 1][0][0];
   }
   return Nl;
-}
-
-function Button(x, y, sz, label) {
-  this.x = x;
-  this.y = y;
-  this.d = sz;
-  this.label1 = label;
-  this.l = (this.label1.length * 4) / 10;
-
-  this.drawAndUpdate = function () {
-    this.draw();
-    //this.updateState();
-  };
-
-  this.draw = function () {
-    fill(0, 0, 255, 50);
-    stroke(0);
-    strokeWeight(1);
-    rect(this.x, this.y, this.d * this.l, this.d, 20, 55, 55, 20);
-    fill(0);
-    strokeWeight(0);
-    textSize(this.d / 1.5);
-
-    text(
-      this.label1,
-      this.x + this.d / 8,
-      this.y + this.d / 5,
-      this.x + this.d,
-      this.y + this.d
-    );
-  };
-  this.isClicked = function () {
-    if (
-      mouseX < this.x + this.d * this.l &&
-      mouseX > this.x &&
-      mouseY < this.y + this.d &&
-      mouseY > this.y
-    ) {
-      if (MPressed) {
-        MPressed = false;
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
 }
 
 function gridOption(x, y, actv, labels) {
