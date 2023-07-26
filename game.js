@@ -115,9 +115,9 @@ function draw() {
     }
     ellipse(width - 40, 290, 30, 30);
 
-    fill(36, 206, 251, 200);
-    rect(width - 80, 85, 15, 15, 5);
     fill(255, 169, 106, 200);
+    rect(width - 80, 85, 15, 15, 5);
+    fill(36, 206, 251, 200);
     rect(width - 80, 165, 15, 15, 5);
 
     if (
